@@ -27,7 +27,7 @@ class SupportServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('support');
+            ->name('support')
     }
 
     public function packageBooted()
@@ -38,6 +38,7 @@ class SupportServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/deka/support.php', 'deka.support');
         $this->registerLengthAwarePaginator();
     }
 
