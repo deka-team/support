@@ -27,7 +27,7 @@ class SupportServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('support')
+            ->name('deka-support');
     }
 
     public function packageBooted()
