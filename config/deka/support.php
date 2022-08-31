@@ -5,5 +5,8 @@ return [
     'route' => [
         'domain' => null,
         'prefix' => '/',
+    ],
+    'middleware' => [
+
     ]
 ];
