@@ -7,6 +7,6 @@ return [
         'prefix' => '/',
     ],
     'middleware' => [
-        'sanctum:auth',
+        'auth:sanctum',
     ],
 ];
