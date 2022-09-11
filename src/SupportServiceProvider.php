@@ -16,6 +16,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
  * Deka\Support\SupportServiceProvider.
+ *
  */
 class SupportServiceProvider extends PackageServiceProvider
 {
@@ -44,26 +45,33 @@ class SupportServiceProvider extends PackageServiceProvider
 
     protected function bootMacro()
     {
-        RedirectResponse::macro('banner', fn ($message) => $this->with('flash', [
-            'bannerStyle' => 'success',
-            'timestamp' => now()->timestamp,
-            'banner' => $message,
-        ]));
-
-        RedirectResponse::macro('dangerBanner', fn ($message) => $this->with('flash', [
-            'bannerStyle' => 'danger',
-            'timestamp' => now()->timestamp,
-            'banner' => $message,
-        ]));
+        RedirectResponse::macro('banner', function($message){
+            /** @var RedirectResponse $this */
+            $this->with('flash', [
+                'bannerStyle' => 'success',
+                'timestamp' => now()->timestamp,
+                'banner' => $message,
+            ]);
+        });
+        RedirectResponse::macro('dangerBanner', function($message){
+            /** @var RedirectResponse $this */
+            $this->with('flash', [
+                'bannerStyle' => 'danger',
+                'timestamp' => now()->timestamp,
+                'banner' => $message,
+            ]);
+        });
     }
 
     protected function bootBlueprint()
     {
         Blueprint::macro('ulid', function ($name = 'ulid') {
+            /** @var Blueprint $this */
             $this->string($name, 26)->unique();
         });
 
-        Blueprint::macro('ulidPrimary', function ($name = 'id') {
+        Blueprint::macro('ulidPrimary', function ($name = 'id') {;
+            /** @var Blueprint $this */
             $this->string($name, 26)->primary();
         });
     }
@@ -95,8 +103,11 @@ class SupportServiceProvider extends PackageServiceProvider
     protected function registerLengthAwarePaginator()
     {
         $this->app->bind(LengthAwarePaginator::class, function ($app, $values) {
+            /** @Paginator */
             return new class(...array_values($values)) extends LengthAwarePaginator
             {
+                protected $merge;
+
                 public function only(...$attributes)
                 {
                     return $this->transform(function ($item) use ($attributes) {
@@ -138,6 +149,9 @@ class SupportServiceProvider extends PackageServiceProvider
                     ];
                 }
 
+                /**
+                 * @return \Illuminate\Support\Collection
+                 */
                 public function links($view = null, $data = [])
                 {
                     $this->appends(Request::all());
