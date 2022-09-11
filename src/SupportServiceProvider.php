@@ -16,7 +16,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 /**
  * Deka\Support\SupportServiceProvider.
- *
  */
 class SupportServiceProvider extends PackageServiceProvider
 {
@@ -45,7 +44,7 @@ class SupportServiceProvider extends PackageServiceProvider
 
     protected function bootMacro()
     {
-        RedirectResponse::macro('banner', function($message){
+        RedirectResponse::macro('banner', function ($message) {
             /** @var RedirectResponse $this */
             $this->with('flash', [
                 'bannerStyle' => 'success',
@@ -53,7 +52,7 @@ class SupportServiceProvider extends PackageServiceProvider
                 'banner' => $message,
             ]);
         });
-        RedirectResponse::macro('dangerBanner', function($message){
+        RedirectResponse::macro('dangerBanner', function ($message) {
             /** @var RedirectResponse $this */
             $this->with('flash', [
                 'bannerStyle' => 'danger',
@@ -70,7 +69,7 @@ class SupportServiceProvider extends PackageServiceProvider
             $this->string($name, 26)->unique();
         });
 
-        Blueprint::macro('ulidPrimary', function ($name = 'id') {;
+        Blueprint::macro('ulidPrimary', function ($name = 'id') {
             /** @var Blueprint $this */
             $this->string($name, 26)->primary();
         });
