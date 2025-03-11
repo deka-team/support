@@ -2,6 +2,4 @@
 
 namespace Deka\Support;
 
-class Support
-{
-}
+class Support {}
